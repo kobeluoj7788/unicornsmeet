@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: 0;
+            vertical-align: baseline;
+            -webkit-overflow-scrolling: touch;
+            list-style: none;
+        }
+        .content {
+            max-width: 720px;
+            margin: auto;
+            padding: 45px 0;
+        }
+        .header {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .line {
+            margin-top: 30px;
+            position: relative;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        input {
+            box-sizing: border-box;
+            padding: 10px 15px;
+            padding-right: 40px;
+            font-size: 14px;
+            display: block;
+            width: 100%;
+        }
+        select {
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #d1d1d1;
+            overflow: hidden;
+            font-size: 14px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 100%;
+            padding-left: 10px;
+            padding-right: 18px;
+        }
+        textarea {
+            box-sizing: border-box;
+            padding: 10px 18px;
+            font-size: 14px;
+            display: block;
+            line-height: 22px;
+            resize: none;
+            min-height: 160px;
+            width: 100%;
+        }
+        .code {
+            display: flex;
+            justify-content: left;
+        }
+        .code input {
+            width: 224px;
+        }
+        .code .img-box {
+            margin-left: 10px;
+            height: 39px;
+            border: 1px solid #d1d1d1;
+        }
+        .code label.error {
+            position: absolute;
+            margin-top: 45px;
+        }
+        input,
+        select,
+        textarea {
+            border: 1px solid #d1d1d1;
+        }
+        .btn {
+            max-width: 160px;
+            margin: 32px 0 30px 0;
+            text-transform: uppercase;
+            text-align: center;
+            color: #fff;
+            background-color: #0f0f0f;
+            cursor: pointer;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            height: 40px;
+            line-height: 42px;
+            font-size: 14px;
+            font-weight: bold;
+            font-style: normal;
+        }
+        .btn.disable {
+            background-color: rgba(27,27,27,.4);
+            cursor: inherit;
+        }
+        .desc {
+            font-size: 14px;
+            color: #777;
+            line-height: 22px;
+        }
+        .photo-box {
+            overflow: hidden;
+            font-size: 14px;
+            margin-top: 16px;
+            min-height: 82px;
+            box-sizing: border-box;
+            color: #999;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            -webkit-mask-image: -webkit-radial-gradient(circle,#fff,#000);
+        }
+        dd,
+        dt {
+            position: relative;
+            color: #999;
+            height: 104px;
+            width: 104px;
+            box-sizing: border-box;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            -webkit-mask-image: -webkit-radial-gradient(circle,#fff,#000);
+            cursor: pointer;
+        }
+        .clear-photo {
+            position: absolute;
+            right: 2px;
+            top: 2px;
+        }
+        .clear-photo i {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            display: block;
+            background: #faf4f4;
+            border-radius: 50%;
+        }
+
+        .clear-photo i:before,
+        .clear-photo i:after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            display: block;
+            height: 1px;
+            top: 8px;
+            right: 3px;
+            background-color: #9f9f9f;
+        }
+
+        .clear-photo i:before {
+            transform: rotate(45deg);
+        }
+
+        .clear-photo i:after {
+            transform: rotate(-45deg);
+        }
+        .add:before,
+        .add:after {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background-color: #000;
+            display: block;
+            margin-bottom: -1px;
+        }
+        .add:after {
+            transform: rotate(90deg);
+        }
+        dt {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        dt label {
+            display: block;
+            cursor: pointer;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 5;
+        }
+
+        dt input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            border: none;
+            opacity: 0;
+            z-index: 2;
+        }
+        .select-box {
+            position: relative;
+            height: 40px;
+            width: 100%;
+        }
+        .select-box:before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            right: 10px;
+            top: 11px;
+            border-bottom: 1px solid #1b1b1b;
+            border-right: 1px solid #1b1b1b;
+            transform: rotate(45deg);
+        }
+
+        .select-box .html-str {
+            height: 38px;
+            line-height: 38px;
+            border: 1px solid #d1d1d1;
+            padding: 0 18px;
+            overflow: hidden;
+            font-size: 14px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .select-box select {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            cursor: pointer;
+            opacity: 0;
+            z-index: 1;
+            padding: 0 18px;
+        }
+        @media screen and (max-width: 768px) {
+            .content {
+                width: inherit;
+                min-width: inherit;
+                margin: 0 16px;
+            }
+        }
+        label.error {
+            color: #ea5043;
+            font-size: 12px;
+            margin-top: 10px;
+            text-transform: capitalize;
+            padding-bottom:0;
+        }
+        .btn {
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: normal;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+    <script type="text/javascript" src="/assets/1b71bbce/jquery/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/assets/cc1f58c0/apiLib/index.js"></script>
+    <script type="text/javascript" src="/assets/cc1f58c0/md5/index.js"></script>
+    <script type="text/javascript" src="/assets/1b71bbce/publicDialog/js/publicDialog.js"></script>
+    <link href="/assets/1b71bbce/publicDialog/css/publicDialog.css" rel="stylesheet" type="text/css">
+    <script src="https://aws-static.tmatch.com/jquery-plugins/jquery.validate.js"></script>
+</head>
+<body>
+<div class="content">
+    <div class="header">FEEDBACK</div>
+    <form id="contactus" action="" method="post">
+
+        <div class="line">
+            <label>Your Email*</label>
+            <input required spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" id="email" name="email" type="text" placeholder="Email Address" />
+        </div>
+        <div class="line">
+            <label>Mobile Number</label>
+            <input spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" id="phone" name="phone" type="text" placeholder="Mobile Number" />
+        </div>
+        <div class="line">
+            <label>Subject*</label>
+            <div class="select-box">
+                <select name="subject" id="subject" onchange="$('#subject_show').text($('#subject').val())">
+                    <option disabled="disabled" value="1">Please Choose</option>
+                    <option value="Disable or Delete Account" selected>Disable or Delete Account</option>
+                    <option value="PREMIUM MEMBERSHIP / Payment / Billing Issues">PREMIUM MEMBERSHIP / Payment / Billing Issues</option>
+                    <option value="Login / Password">Login / Password</option>
+                    <option value="Registration / Account">Registration / Account</option>
+                    <option value="Photos / Profile">Photos / Profile</option>
+                    <option value="Flame / Discover">Flame / Discover</option>
+                    <option value="Messages / Winks">Messages / Winks</option>
+                    <option value="Suggestions">Suggestions</option>
+                    <option value="Technical Issues">Technical Issues</option>
+                    <option value="Safety Concerns">Safety Concerns</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div class="html-str" id="subject_show">Disable or Delete Account</div>
+            </div>
+        </div>
+        <div class="line">
+            <label>Feedback, Question, Comment or Suggestion*</label>
+            <textarea required id="content" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" placeholder="Kindly explain your issue or ask us a question. Please be as specific as possible." name="content"></textarea>
+        </div>
+        <div class="line">
+            <label>Type the Characters as Shown in the Image*</label>
+            <div class="code">
+                <input required spellcheck="false" maxlength="6" autocapitalize="off" autocorrect="off" autocomplete="off" id="code" name="code" type="text">
+                <div class="img-box">
+                    <img id="code_img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBxdWFsaXR5ID0gMTUK/9sAQwA1JSgvKCE1LysvPDk1P1CFV1BJSVCjdXthhcGqy8i+qrq31fD//9Xi/+a3uv///////////87//////////////9sAQwE5PDxQRlCdV1ed/9y63P///////////////////////////////////////////////////////////////////8AAEQgAKAB4AwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A06KKKACimNLGhwzqp9Caju8/Z2ZJCpUZyO9AE9FVLe7jEUayygyMKnmBMR2uUxzkUASUVXtpswKZXG456nFTggjIIIoAWikzTJZREucZJ4AHc0ASUVHEZTnzFVR2ANNnlaLbtjZ9xxx2oAmooooAKKKKACkpaKAKFpEk6ySTDc5bHPamNiCwkTzUck4UA/nViWyjkk3hmTPUL3pxsoCiqUzt6c0irlSVYk00bVG5sc981blbZZdedoFRtp0BAxuGPQ1ILOERhME46EnmmhFWCPfMsc+cBflFWJraJYiV+XHvQbJeCjupHQ5pzW7vjMxIGOopsTI4YVmLO/r93PSh2dr0hFBKjAJ6CpPs7+YXEu3PXAokjkWbzYsEkYIPekTYWKVvMMUoAbGQR0NQXdonlyzbnL4z16VNHFIZvNlwDjAAqrLdt5txHIQE2lVUjvVK99Bl6F/MhRs5yoNSVWsAws0DDHXH0zVmpe4wooooAKKKKACiiigAooooAKKKKACiiigApjRRuwZkUsO5FFFADqWiigAooooA/9k=" style="cursor:pointer" onclick="refreshCaptcha(this)">
+                </div>
+            </div>
+        </div>
+        <button class="btn" type="submit" id="contact_submit">Submit</button>
+    </form>
+</div>
+</body>
+<script>
+    $.validator.setDefaults({
+        focusInvalid: true,
+        onfocusout: function(element) { $(element).valid(); },
+        submitHandler: function(form) {
+            contact_submit();
+        },
+
+    });
+    function refreshCaptcha(obj) {
+        $.ajax({
+            type: 'post',
+            url: 'refresh_captcha',
+            dataType: "json",
+            async:false,
+            success: function(response) {
+                if (response.code == 200) {
+                    $(obj).attr('src', response.data['captcha']);
+                }
+            }
+        });
+    }
+
+
+    $(function() {
+        $("#contactus").validate({
+            rules:{
+                content: {
+                    required: true,
+                },
+                phone: {
+                    required: false,
+                },
+                email: {
+                    required: true,
+                    email:true,
+                },
+                code: {
+                    required: true,
+                },
+            }
+
+        });
+    });
+
+   
+    function contact_submit() {
+        var postData = {
+            'email' : $('#email').val(),
+            'phone' : $('#phone').val(),
+            'subject' : $('#subject').val(),
+            'content' : $('#content').val(),
+            'code' : $('#code').val(),
+        }
+        API.ajax({
+            url:'feedback',
+            type: 'post',
+            data: postData,
+            contentType: 'application/x-www-form-urlencoded',
+            success: function(response) {
+                if (response.code == 200) {
+                    $.publicDialog({
+                        title:'',
+                        content :'Thank you for your feedback.',
+                        sureBtn:{
+                            status: true,
+                            text:'CONTINUE',
+                            callback: function() {
+                                $.closePublicDialog();
+                                window.location.href = '/delete_app'
+                            }
+                        },
+                    });
+                } else {
+                    let errObj = {
+                        errorCode: 2, //0:init 1:pass， 2:error
+                        errormsg: response.message || 'We got an error. Please try again later.' //err message
+                    }
+                    switch (parseInt(response.code)) {
+                        case 30002004:
+                            $.publicDialog({content: errObj.errormsg});
+                            $('#code_img').trigger("click");
+                            $('#code').val('').focus();
+                            $('.code label.error').remove();
+                            break
+                        default:
+                            $.publicDialog({content: errObj.errormsg});
+                    }
+                }
+
+
+            }
+        })
+    }
+    function getCookie(name){
+        const value = "; " + document.cookie;
+        const parts = value.split("; " + name + "=");
+        if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+</script>
+
+</html>

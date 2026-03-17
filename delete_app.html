@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Android App information</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: 0;
+            vertical-align: baseline;
+            -webkit-overflow-scrolling: touch;
+            list-style: none;
+        }
+        .content {
+            max-width: 500px;
+            margin: auto;
+            padding: 0 16px;
+        }
+        .logo {
+            width: 300px;
+            height: 44px;
+            margin: auto;
+            margin-top: 200px;
+            text-align: center;
+        }
+        .logo img {
+            width: 100%;
+            height: 100%;
+        }
+        .desc {
+            margin-top: 60px;
+            font-size: 15px;
+            /* font-family: Hind-Regular, Hind; */
+            font-weight: 400;
+            color: #0F0F0F;
+            line-height: 22px;
+            text-align: center;
+        }
+        .info-box {
+            background-color: rgba(246, 246, 246, 1);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            margin: 32px auto;
+        }
+        .info-box .ico {
+            width: 70px;
+            height: 70px;
+            margin-right: 24px;
+        }
+        .info-box .ico img {
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+        }
+        .info-box .title {
+            font-size: 15px;
+            /* font-family: Hind-SemiBold, Hind; */
+            font-weight: 600;
+            color: #0F0F0F;
+            line-height: 22px;
+            margin-bottom: 6px;
+        }
+        .info-box .developer {
+            font-size: 15px;
+            /* font-family: Hind-Regular, Hind; */
+            font-weight: 400;
+            color: #3D3D3D;
+            line-height: 22px;
+        }
+        .data {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .data_center {
+            justify-content: center;
+        }
+        .data > div {
+            width: 240px;
+            height: 94px;
+            border-radius: 12px;
+            border: 1px solid #EBEBEB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .review,
+        .download {
+            width: 32px;
+            height: 32px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-bottom: 16px;
+        }
+        .review {
+            background-image: url(https://aws-static.tmatch.com/de4/statics/prod/common/ic_review.png);
+        }
+        .download {
+            background-image: url(https://aws-static.tmatch.com/de4/statics/prod/common/ic_downloads.png);
+        }
+        .data div.number {
+            font-size: 15px;
+            font-weight: 500;
+            color: #0F0F0F;
+            line-height: 22px;
+            text-align: center;
+        }
+        .btn {
+            height: 44px;
+            background: #0F0F0F;
+            border-radius: 8px;
+            font-size: 16px;
+            /* font-family: Hind-SemiBold, Hind; */
+            font-weight: 600;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: 44px;
+            margin-top: 60px;
+            margin-bottom: 24px;
+            cursor: pointer;
+        }
+        .note,
+        .note a {
+            font-size: 14px;
+            /* font-family: Hind-Regular, Hind; */
+            font-weight: 400;
+            color: #0F0F0F;
+            line-height: 22px;
+            text-align: center;
+        }
+        .note a {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .data .line {
+            display: none;
+        }
+        @media screen and (max-width: 768px) {
+            .logo {
+                margin-top: 80px;
+            }
+            .desc {
+                text-align: left;
+            }
+            .info-box {
+                margin: 24px auto;
+            }
+            .data > div {
+                border: unset;
+            }
+            .data .line {
+                display: block;
+                width: 1px;
+                height: 28px;
+                background: #EBEBEB;
+            }
+            .data div.number span {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <h3 class="logo">BFun: Bisexual, Couples Date</h3>
+    <p class="desc">Please take a moment to review our Android App information in Google Play before proceeding with the account deletion process.</p>
+    <div class="info-box">
+        <div class="ico"><img src="https://pic.bicupid.com/b/18ba6e68c4043b46767a38473edaad30.jpg" /></div>
+        <div class="info">
+            <div class="title">BFun: Bisexual, Couples Date</div>
+            <div class="developer">Bisexual Dating Fun</div>
+        </div>
+    </div>
+    <div class="data data_center">
+        
+        
+            </div>
+    <div class="btn"  onclick="window.location.href='https://play.google.com/store/apps/details?id=bisexual.dating.hookup'">
+        <a href="https://play.google.com/store/apps/details?id=bisexual.dating.hookup" style="color: #fff; text-decoration: none">Install</a>
+    </div>
+    <div class="note">If you have confirmed that you want to disable or delete your account with us, please continue by <a href="/delete_app_feedback">clicking here.</a></div>
+</div>
+</body>
+</html>
